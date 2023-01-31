@@ -194,9 +194,8 @@ Example:
 
  features will add to the project.
 
-- [ ] use the "Decorator" design pattern
-- [ ] set up associations.
-- [ ] add basic UI
+- [ ] preserve data.
+- [ ] unit tests.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
