@@ -23,6 +23,7 @@ class Person < Nameable
 
   def add_rental(rental)
     @rentals << rental 
+    rental.person = self
   end
 
   private
