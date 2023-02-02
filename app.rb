@@ -2,6 +2,7 @@ require "./book.rb"
 require "./person.rb"
 require "./student.rb"
 require "./teacher.rb"
+require "./rental.rb"
 
 class App
 
@@ -90,7 +91,41 @@ class App
 
    def creat_rental
     puts "select a book from the following lists by number"
+    @books.each_with_index{ |book,index| puts "#{book.index + 1 } : Title : #{book.title} , Author : #{book.author}" }
+    book_index = gets.chomp.to_i
+    chosen_book = @books[book_index]
+    
+    puts "Select a person from the following list by number(not id)"
+    @people.each_with_index { |person,index| puts "#{person.index}, Name: #{person.name} ,Id : #{person.age}" }
+    person_index = gets.chomp.to_i
+    chosen_person = @people[person_index]
+
+    puts "Enter your date[yyyy-mm-dd]:"
+    date = gets.chomp.to_s
+
+    rental = Rental.new(date: date,person: chosen_person, book: chosen_book)
+    @rentals << rental
+    print "Book created!"
    end
+
+   # create a list for rental
+
+   def list_rentals
+    puts "Id of person:"
+    id = gets.chomp.to_i
+
+    puts "Rentals: "
+    rental = @rentals.select { |rent| rent.person.id == id }
+    if rental.length == 0
+      puts "You don't have a rental book"
+    else
+      puts "Here is your books"
+      rental.each_with_index { |rental, index| puts "#{index} #{rental}"}
+    end
+  end
+  
+
+
 
 
 end
