@@ -4,7 +4,6 @@ require "./teacher"
 require "./classroom"
 require "./book"
 require "./rental"
-require "./main.rb"
 
 class App
   def initialize
@@ -18,7 +17,7 @@ class App
    puts "No book is available right now!" if @books.length == 0
    puts "There are #{@books.length} books is available"
    @books.each_with_index {
-    |book,index| puts "#{index + 1}, Title : #{book.title} , Author : #{book.author}"
+    |book,index| puts "#{index + 1}, Title : #{book.title} , Author : #{book.author} "
    }
   end
 
@@ -26,7 +25,7 @@ class App
   def list_all_people
    puts "No one!You can be the first person" if @people.length == 0
    puts "#{@people.length} added!"
-   @people.each_with_index { |person,index| puts "#{index + 1 }, Name: #{person.name} , Age: #{person.age} " }
+   @people.each_with_index { |person,index| puts "#{index + 1 }, Name: #{person.name} , Age: #{person.age} Id : #{person.id}" }
   end
 
   # create a student
@@ -45,7 +44,7 @@ class App
     parent_permission = false
    end
    classroom = Classroom.new("Russian")
-   student = Student.new(age,classroom,name,parent_permission)
+   student = Student.new(age,classroom,name,parent_permission:)
    @people << student
    puts " created!"
   end
@@ -92,13 +91,13 @@ class App
   def create_a_rental
     puts "Select a book from the following list by number: "
   @books.each_with_index {
-    |book,index| puts "#{index + 1}, Title : #{book.title} , Author : #{book.author}" }
+    |book,index| puts "#{index}, Title : #{book.title} , Author : #{book.author}" }
    puts @books
 
    chosen_book = gets.chomp.to_i
 
    puts "Select a person from the following list by number (not id)"
-    @people.each_with_index { |person,index| puts "#{index + 1 }, Name: #{person.name} , Age: #{person.age} " }
+    @people.each_with_index { |person,index| puts "#{index}, Name: #{person.name} , Age: #{person.age} " }
    chosen_person = gets.chomp.to_i
 
    puts "Date: [yyyy,mm,dd]"
@@ -112,10 +111,10 @@ class App
   def list_all_rentals
     puts "no rentals available" if @rentals.length == 0
     puts "input your id to see the rental: "
-    rental = gets.chomp.to_i
+    id = gets.chomp.to_i
 
     puts "Rental list:"
-    @rentals.each_with_index { |rental,index| puts "#{index}, Date : #{rental.date}, Name: #{rental.name}, BookName: #{rental.title}, Author: #{rental.author}" }
+    @rentals.each_with_index { |rental,index| puts "#{index}, Date : #{rental.date}, Name: #{rental.person.name},Age: #{rental.person.age},  BookName: #{rental.book.title}, BookAuthor : #{rental.book.author}" if rental.person.id == id}
   end
 
   def chose_option
@@ -129,5 +128,33 @@ class App
     7. Exist"
     answer = gets.chomp
   end
+
+ def choices(choice)
+ case choice
+ when '1'
+  list_all_books
+ when '2'
+  list_all_people
+  when '3'
+   create_a_person
+  when '4'
+   create_a_book
+  when '5'
+   create_a_rental
+  when '6'
+   list_all_rentals
+  when '7'
+    exit!
+  return
+  end
+ end
+
+ def run
+  puts "Welcome to the school library"
+  loop do 
+  choice = chose_option
+  choices(choice)
+  end
+ end
 
 end
