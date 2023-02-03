@@ -1,131 +1,133 @@
-require "./book.rb"
-require "./person.rb"
-require "./student.rb"
-require "./teacher.rb"
-require "./rental.rb"
+require "./person"
+require "./student"
+require "./teacher"
+require "./classroom"
+require "./book"
+require "./rental"
+require "./main.rb"
 
 class App
-
- def initialize
-  @books = []
-  @people = []
-  @rentals = []
-
- end
-
- # list all the book
- def list_all_books
-  puts "There are #{books.length} in this book list"
-  @books.each { |book| puts "Title : #{title} , Author : #{author}" }
- end
-
- # list all people
-
- def list_all_people
-  puts "#{people.length} is added to the list!"
-  @people.each { |person| puts "Id : #{person.id}, Name : #{person.name}, Age : #{person.age}"}
- end
-
- # create a person
- def create_a_person
-  puts "Do you want to create a student(1) or a teacher (2)?"
-  answer = gets.chomp
-  case answer 
-  when "1"
-    create_student(name,age,parent_permission)
-  when "2"
-    create_teacher(age,name,specialization)
-  else
-    print "Please try again"
+  def initialize
+   @books = []
+   @people = []
+   @rentals = []
   end
 
- end
+  # list all the books
+  def list_all_books
+   puts "No book is available right now!" if @books.length == 0
+   puts "There are #{@books.length} books is available"
+   @books.each_with_index {
+    |book,index| puts "#{index + 1}, Title : #{book.title} , Author : #{book.author}"
+   }
+  end
 
- # create a student
- def create_student
-  puts "Age:"
-  age = gets.chomp
-  puts "Name: "
-  name = gets.chomp
-  puts "Do you have your parent permission? [Y/N]"
-  answer = gets.chomp.downcase
-  case answer
-  when 'y'
+  # list all the people 
+  def list_all_people
+   puts "No one!You can be the first person" if @people.length == 0
+   puts "#{@people.length} added!"
+   @people.each_with_index { |person,index| puts "#{index + 1 }, Name: #{person.name} , Age: #{person.age} " }
+  end
+
+  # create a student
+
+  def create_student
+   puts "Age: "
+   age = gets.chomp
+   puts "Name: "
+   name = gets.chomp
+   puts "Has parent permission?[Y/N]"
+   answer = gets.chomp.downcase
+   case answer
+   when "Y"
     parent_permission = true
-  when 'n'
+   when "N"
     parent_permission = false
-  else
-    puts "Invalid,failed"
+   end
+   classroom = Classroom.new("Russian")
+   student = Student.new(age,classroom,name,parent_permission)
+   @people << student
+   puts " created!"
   end
-  student = Student.new(age, name, parent_permission)
-  @people << student
-  print "Student created"
-  end
-
-  # create a teacher 
 
   def create_teacher
-    puts "Age:"
-    age = gets.chomp
-    puts "Name:"
-    name = gets.chomp
-    puts "What is your specialization?"
-    specialization = gets.chomp
-    teacher = Teacher.new(age: age, name: name, specialization: specialization)
-    @people << teacher
-    print "teacher created"
+   puts "Age:"
+   age = gets.chomp
+   puts "Name: "
+   name = gets.chomp
+   puts " Specialization: "
+   specialization = gets.chomp
+   teacher = Teacher.new(age,specialization,name)
+   @people << teacher
+   puts "teacher created"
   end
 
-  # create a book
-   def create_book
-    puts "Title:"
-    title = gets.chomp
-    puts "Author: "
-    author = gets.chomp
-    book = Book.new(title,author)
-    @books << book
-    print "Book created"
+  def create_a_person
+   puts "Do you want to create a student account(1) or teacher account (2)"
+   choice = gets.chomp
+   case choice
+   when '1'
+    create_student
+   when '2'
+    create_teacher
+   else
+    puts "invalid input"
+    return 
    end
-
-   # create a rental
-
-   def creat_rental
-    puts "select a book from the following lists by number"
-    @books.each_with_index{ |book,index| puts "#{book.index + 1 } : Title : #{book.title} , Author : #{book.author}" }
-    book_index = gets.chomp.to_i
-    chosen_book = @books[book_index]
-    
-    puts "Select a person from the following list by number(not id)"
-    @people.each_with_index { |person,index| puts "#{person.index}, Name: #{person.name} ,Id : #{person.age}" }
-    person_index = gets.chomp.to_i
-    chosen_person = @people[person_index]
-
-    puts "Enter your date[yyyy-mm-dd]:"
-    date = gets.chomp.to_s
-
-    rental = Rental.new(date: date,person: chosen_person, book: chosen_book)
-    @rentals << rental
-    print "Book created!"
-   end
-
-   # create a list for rental
-
-   def list_rentals
-    puts "Id of person:"
-    id = gets.chomp.to_i
-
-    puts "Rentals: "
-    rental = @rentals.select { |rent| rent.person.id == id }
-    if rental.length == 0
-      puts "You don't have a rental book"
-    else
-      puts "Here is your books"
-      rental.each_with_index { |rental, index| puts "#{index} #{rental}"}
-    end
+   puts "created!"
   end
-  
 
+  # creat book
+  def create_a_book
+   puts "Title : "
+   title = gets.chomp
+   puts "Author: "
+   author = gets.chomp
+   book = Book.new(title,author)
+   @books << book
+   puts "Book created"
+  end
 
+  # create a rental
+  def create_a_rental
+    puts "Select a book from the following list by number: "
+  @books.each_with_index {
+    |book,index| puts "#{index + 1}, Title : #{book.title} , Author : #{book.author}" }
+   puts @books
 
+   chosen_book = gets.chomp.to_i
+
+   puts "Select a person from the following list by number (not id)"
+    @people.each_with_index { |person,index| puts "#{index + 1 }, Name: #{person.name} , Age: #{person.age} " }
+   chosen_person = gets.chomp.to_i
+
+   puts "Date: [yyyy,mm,dd]"
+   date = gets.chomp.to_s
+   rental = Rental.new(date, @people[chosen_person], @books[chosen_book])
+
+   @rentals << rental
+   puts "rental created"
+  end
+
+  def list_all_rentals
+    puts "no rentals available" if @rentals.length == 0
+    puts "input your id to see the rental: "
+    rental = gets.chomp.to_i
+
+    puts "Rental list:"
+    @rentals.each_with_index { |rental,index| puts "#{index}, Date : #{rental.date}, Name: #{rental.name}, BookName: #{rental.title}, Author: #{rental.author}" }
+  end
+
+  def chose_option
+    puts "Please an option by selecting a number:
+    1. List all books
+    2. List all people
+    3. Create a person
+    4. Create a book
+    5. Create a rental
+    6. List all rentals for a givem person id
+    7. Exist"
+    answer = gets.chomp
+  end
 
 end
