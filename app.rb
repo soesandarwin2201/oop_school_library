@@ -121,42 +121,4 @@ class App
     end
   end
 
-  def chose_option
-    puts "Please an option by selecting a number:
-    1. List all books
-    2. List all people
-    3. Create a person
-    4. Create a book
-    5. Create a rental
-    6. List all rentals for a givem person id
-    7. Exist"
-    gets.chomp
-  end
-
-  def choose(choice)
-    case choice
-    when '1'
-      list_all_books
-    when '2'
-      list_all_people
-    when '3'
-      create_a_person
-    when '4'
-      create_a_book
-    when '5'
-      create_a_rental
-    when '6'
-      list_all_rentals
-    end
-  end
-
-  def run
-    puts 'Welcome to the school library'
-    loop do
-      choice = chose_option
-      return if choice == '7'
-
-      choose(choice)
-    end
-  end
 end
