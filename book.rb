@@ -12,6 +12,7 @@ class Book
   end
 
   def to_s
-    'here is  a book'
+    'here is a book'
   end
+
 end

@@ -95,6 +95,8 @@ class App
   def create_a_book
     input = ask_title_author
     book = Book.new(input[0], input[1])
+    puts book
+    File.write("books.json", book, mode: "a")
     @books << book
     puts 'Book created'
   end
