@@ -1,7 +1,7 @@
-require './app'
+require './run_app'
 
 def main
-  app = App.new
+  app = RunApp.new
   app.run
 end
 
