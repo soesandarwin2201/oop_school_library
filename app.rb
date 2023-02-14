@@ -87,7 +87,7 @@ class App
     title = gets.chomp
     puts 'Author: '
     author = gets.chomp
-    [title,author]
+    [title, author]
   end
 
   # creat book

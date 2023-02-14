@@ -1,13 +1,13 @@
-require './app.rb'
-require './display_app.rb'
+require './app'
+require './display_app'
 
 class RunApp
- def initialize
-  @app = App.new
-  @display = DisplayApp.new
- end
+  def initialize
+    @app = App.new
+    @display = DisplayApp.new
+  end
 
-   def choose(choice)
+  def choose(choice)
     case choice
     when '1'
       @app.list_all_books
@@ -22,9 +22,9 @@ class RunApp
     when '6'
       @app.list_all_rentals
     end
-   end
+  end
 
- def run
+  def run
     puts 'Welcome to the school library'
     loop do
       choice = @display.chose_option
@@ -32,5 +32,5 @@ class RunApp
 
       choose(choice)
     end
- end
- end
+  end
+end
