@@ -26,6 +26,16 @@ class Person < Nameable
     rental.person = self
   end
 
+  def create_json 
+    {
+      id: @id,
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission,
+      specialization: @specialization
+    }
+  end
+
   private
 
   def of_age?
