@@ -52,7 +52,9 @@ class App
   end
 
   def close
-    @book_store.write(@books.map(&:create_json))
+    book = @books.map(&:create_json)
+    write_data = JSON.pretty_generate(book)
+    File.write('books.json', write_data)
   end
 
   def start_loop
