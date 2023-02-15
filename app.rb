@@ -51,7 +51,6 @@ class App
     puts 'Book created successfully'
   end
 
-  
   def close
     @book_store.write(@books.map(&:create_json))
   end
@@ -62,5 +61,4 @@ class App
       list_options
     end
   end
-
 end
