@@ -20,8 +20,8 @@ class App
   def list_options
     option = gets.chomp.to_s
     case option
-    # when '1'
-    #   list_all_books
+    when '1'
+      list_all_books
     # when '2'
     #   list_all_people
     # when '3'
@@ -40,8 +40,13 @@ class App
     end
   end
 
-  # Create & store a Book
+  # List all Books option "1"
+  def list_all_books
+    puts 'All books'
+    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+  end
 
+  # Create & store a Book option "4"
   def create_a_book
     print 'Title: '
     title = gets.chomp
@@ -51,6 +56,7 @@ class App
     puts 'Book created successfully'
   end
 
+  # Exit from the app and write all data in files
   def close
     book = @books.map(&:create_json)
     write_data = JSON.pretty_generate(book)
