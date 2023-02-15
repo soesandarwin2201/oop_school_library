@@ -24,11 +24,11 @@ class App
     @books << Book.new(title, author)
     puts title
     book = {
-      "title" => title,
-      "author" => author
+      title: title,
+      author: author
     }
-
-    File.write("books.json", book.to_json, mode: "a")
+    # file.write "\n"
+    File.write('books.json', book.to_json, mode: 'a')
     puts 'Book created successfully'
   end
 
