@@ -15,6 +15,7 @@ class App
   end
 
   @book_store = DataStore.new('books')
+  @books = @book_store.read.map { |book| Book.new(book['title'], book['author']) }
 
   def create_a_book
     print 'Title: '
@@ -22,18 +23,10 @@ class App
     print 'Author: '
     author = gets.chomp
     @books << Book.new(title, author)
-    puts title
-    book = {
-      title: title,
-      author: author
-    }
-    # file.write "\n"
-    File.write('books.json', book.to_json, mode: 'a')
+    book = @books.map(&:create_json)
+    write_data = JSON.pretty_generate(book)
+    File.write('books.json', write_data)
     puts 'Book created successfully'
-  end
-
-  def close
-    @book_store.write(@book.map(&:create_json))
   end
 
   def list_all_books
