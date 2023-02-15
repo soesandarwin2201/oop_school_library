@@ -24,6 +24,8 @@ class App
                     parent_permission: person['parent_permission'])
       end
     end
+    @rental_store = DataStore.new('rentals')
+    @rentals = @rental_store.read.map { |rental| Rental.new(rental['date'], rental['person'], rental['book'])}
   end
 
   def list_options
@@ -37,10 +39,10 @@ class App
       create_a_person
     when '4'
       create_a_book
-    # when '5'
-    #   create_a_rental
-    # when '6'
-    #   list_all_rentals
+    when '5'
+      create_a_rental
+    when '6'
+      list_all_rentals
     when '7'
       puts 'File saved successfully!'
       puts 'Thank you for using this app!'
@@ -123,6 +125,44 @@ class App
     puts 'Book created successfully'
   end
 
+  # create a rental book
+  def rental_book
+    puts "Select a book from the following list by number: "
+    @books.each_with_index { |book,index| puts "#{index} , Title: #{book.title}, Author: #{book.author}"}
+    book_index = gets.chomp.to_i
+    @books[book_index]
+  end
+
+  # create a rental person
+  def rental_person
+    puts "Select a person from the list by number (not id)"
+    @people.each_with_index {|person,index| puts "#{index}, Name: #{person.name}, Age: #{person.age}"}
+    people_index = gets.chomp.to_i
+    @people[people_index]
+  end
+
+  # create a rental
+  def create_a_rental
+    book = rental_book
+    person = rental_person
+    puts "Date: [yyyy-mm-dd]"
+    date = gets.chomp.to_s
+    rental = Rental.new(date,person,book)
+    @rentals << rental
+    puts "You rent a book!"
+  end
+
+  # def list_all_rentals
+  #   puts 'no rentals available' if @rentals.empty?
+  #   puts 'input your id to see the rental: '
+  #   id = gets.chomp.to_i
+  #   puts 'Rental list:'
+  #   @rentals.each_with_index do |rental, index|
+  #     puts "#{index}, Date : #{rental.date}, Name: #{rental.person.name},Age: #{rental.person.age},  BookName: #{rental.book.title}, BookAuthor : #{rental.book.author}" if rental.person.id == id
+  #   end
+  # end
+    
+
   # Exit from the app and write all data in files
   def close
     book = @books.map(&:create_json)
@@ -131,6 +171,9 @@ class App
     people = @people.map(&:create_json)
     people_data = JSON.pretty_generate(people)
     File.write('people.json', people_data)
+    rental= @rentals.map(&:create_json)
+    rental_data = JSON.pretty_generate(rental)
+    File.write('rentals.json',rental_data)
   end
 
   def start_loop

@@ -8,4 +8,11 @@ class Rental
     @book.rentals << self
     @person.rentals << self
   end
+
+  def create_json
+   { date: @date,
+    person: @person,
+    book: @book
+  }
+  end
 end
