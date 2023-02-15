@@ -14,12 +14,11 @@ class Rental
   end
 
   def create_json
-   { 
-    id: @id,
-    date: @date,
-    person: @person,
-    book: @book
-  }
+    {
+      id: @id,
+      date: @date,
+      person: @person,
+      book: @book
+    }
   end
-
 end

@@ -30,7 +30,7 @@ class Person < Nameable
     "Name: #{@name}, ID: #{@id}, Age: #{@age}, ID : #{@id}"
   end
 
-  def create_json 
+  def create_json
     {
       id: @id,
       age: @age,

@@ -23,7 +23,7 @@ class Student < Person
   end
 
   def create_json
-    { 
+    {
       id: @id,
       age: @age,
       classroom: @classroom,

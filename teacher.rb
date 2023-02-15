@@ -15,7 +15,7 @@ class Teacher < Person
   end
 
   def create_json
-    { 
+    {
       id: @id,
       age: @age,
       specialization: @specialization,
