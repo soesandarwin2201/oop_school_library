@@ -7,12 +7,12 @@ class Book
     @rentals = []
   end
 
-  def add_rental(rental)
-    @rentals << rental
+  def rental(rental)
+    @rentals = rental
+    rental.book = self
   end
 
-  def to_s
-    'here is a book'
+  def create_json
+    { title: @title, author: @author }
   end
-
 end

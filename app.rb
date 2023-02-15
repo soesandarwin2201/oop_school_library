@@ -4,6 +4,8 @@ require './teacher'
 require './classroom'
 require './book'
 require './rental'
+require './data_store'
+require 'json'
 
 class App
   def initialize
@@ -12,7 +14,27 @@ class App
     @rentals = []
   end
 
-  # list all the books
+  @book_store = DataStore.new('books')
+
+  def create_a_book
+    print 'Title: '
+    title = gets.chomp
+    print 'Author: '
+    author = gets.chomp
+    @books << Book.new(title, author)
+    puts title
+    book = {
+      "title" => title,
+      "author" => author
+    }
+
+    File.write("books.json", book.to_json, mode: "a")
+    puts 'Book created successfully'
+  end
+
+  def close
+    @book_store.write(@book.map(&:create_json))
+  end
 
   def list_all_books
     puts 'No book is available right now!' if @books.empty?
@@ -88,17 +110,6 @@ class App
     puts 'Author: '
     author = gets.chomp
     [title, author]
-  end
-
-  # creat book
-
-  def create_a_book
-    input = ask_title_author
-    book = Book.new(input[0], input[1])
-    puts book
-    File.write("books.json", book, mode: "a")
-    @books << book
-    puts 'Book created'
   end
 
   def rental_book
