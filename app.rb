@@ -61,7 +61,7 @@ class App
   def list_all_people
     puts "No one, You can be the first peron" if @people.empty?
     puts "#{@people.length} is added!"
-    @people.each_with_index { |person,index| puts " #{person.class}, #{index + 1 }, ID: #{person.id}, Name: #{person.name}, Age: #{person.age} "}
+    @people.each_with_index { |person,index| puts " #{person.class}, #{index + 1 }, ID: #{person.id}, Name: #{person.name}, Age: #{person.age}"}
   end
 
   #get the input from user
@@ -152,15 +152,14 @@ class App
     puts "You rent a book!"
   end
 
-  # def list_all_rentals
-  #   puts 'no rentals available' if @rentals.empty?
-  #   puts 'input your id to see the rental: '
-  #   id = gets.chomp.to_i
-  #   puts 'Rental list:'
-  #   @rentals.each_with_index do |rental, index|
-  #     puts "#{index}, Date : #{rental.date}, Name: #{rental.person.name},Age: #{rental.person.age},  BookName: #{rental.book.title}, BookAuthor : #{rental.book.author}" if rental.person.id == id
-  #   end
-  # end
+  # list all the rentals
+  def list_all_rentals
+    puts "No rentals available" if @rentals.empty?
+    puts "input your id to to sse the rental: "
+    id = gets.chomp.to_i
+    puts "Rental list: "
+    @rentals.each_with_index { |rental,index|puts  "#{index}, Date : #{rental.date}, Name: #{rental.person.name},Age: #{rental.person.age},  BookName: #{rental.book.title}, BookAuthor : #{rental.book.author}" if rental.person.id == id}
+  end
     
 
   # Exit from the app and write all data in files

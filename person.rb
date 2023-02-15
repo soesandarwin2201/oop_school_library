@@ -26,6 +26,10 @@ class Person < Nameable
     rental.person = self
   end
 
+  def to_s
+    "Name: #{@name}, ID: #{@id}, Age: #{@age}, ID : #{@id}"
+  end
+
   def create_json 
     {
       id: @id,

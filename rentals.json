@@ -1,0 +1,17 @@
+[
+  {
+    "date": "2023-05-19",
+    "person": "#<Teacher:0x000001de6f84dd58>",
+    "book": "#<Book:0x000001de6ac43fe8>"
+  },
+  {
+    "date": "2023-05-19",
+    "person": "Name: soe sandar win, ID: 571, Age: ",
+    "book": "Title: 10x rules, Author: soe "
+  },
+  {
+    "date": "2023-05-19",
+    "person": "Name: soe sandar win, ID: 987, Age: 20",
+    "book": "Title: 10x rules, Author: soe "
+  }
+]

@@ -1,9 +1,8 @@
 [
   {
-    "id": 443,
     "age": "20",
+    "specialization": null,
     "name": "soe sandar win",
-    "parent_permission": null,
-    "specialization": null
+    "parent_permission": null
   }
 ]
