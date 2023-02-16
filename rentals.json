@@ -1,17 +1,26 @@
 [
   {
-    "date": "2023-05-19",
-    "person": "#<Teacher:0x000001de6f84dd58>",
-    "book": "#<Book:0x000001de6ac43fe8>"
+    "data": "12-12-2022",
+    "id": 549,
+    "bookObj": {
+      "title": "Pather Dabi",
+      "author": "Sarat Chandra"
+    },
+    "personObj": {
+      "age": "CS",
+      "name": "Saikat"
+    }
   },
   {
-    "date": "2023-05-19",
-    "person": "Name: soe sandar win, ID: 571, Age: ",
-    "book": "Title: 10x rules, Author: soe "
-  },
-  {
-    "date": "2023-05-19",
-    "person": "Name: soe sandar win, ID: 987, Age: 20",
-    "book": "Title: 10x rules, Author: soe "
+    "data": "12-10-2022",
+    "id": 371,
+    "bookObj": {
+      "title": "Wings of Fire",
+      "author": "APJ A Kalam"
+    },
+    "personObj": {
+      "age": "12",
+      "name": "Robert"
+    }
   }
 ]

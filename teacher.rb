@@ -1,7 +1,7 @@
 require './person'
 
 class Teacher < Person
-  def initialize(age, specialization, name = 'unknown', parent_permission: true)
+  def initialize(specialization, age, name = 'Unknown', parent_permission: true)
     super(age, name, parent_permission: parent_permission)
     @specialization = specialization
   end
@@ -10,17 +10,7 @@ class Teacher < Person
     true
   end
 
-  def to_s
-    "Name: #{@name}, ID: #{@id}, Age: #{@age}, ID : #{@id}"
-  end
-
   def create_json
-    {
-      id: @id,
-      age: @age,
-      specialization: @specialization,
-      name: @name,
-      parent_permission: @parent_permission
-    }
+    super.merge({ type: self.class, specialization: @specialization })
   end
 end

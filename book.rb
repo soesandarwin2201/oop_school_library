@@ -12,10 +12,6 @@ class Book
     rental.book = self
   end
 
-  def to_s
-    "Title: #{@title}, Author: #{@author}"
-  end
-
   def create_json
     { title: @title, author: @author }
   end
