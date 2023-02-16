@@ -21,14 +21,17 @@ class RunApp
       @app.create_a_rental
     when '6'
       @app.list_all_rentals
+    when '7'
+      @app.store_data
+      exit 0
     end
   end
 
   def run
     puts 'Welcome to the school library'
+    @app.create_json
     loop do
       choice = @display.chose_option
-      return if choice == '7'
 
       choose(choice)
     end
