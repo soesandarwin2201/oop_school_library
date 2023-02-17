@@ -42,6 +42,7 @@ class App
     end
   end
 
+  # rubocop:disable all
   def list_options
     option = gets.chomp.to_s
     case option
@@ -64,11 +65,12 @@ class App
       exit 0
     end
   end
+  # rubocop:enable all
 
   # List all Books option "1"
   def list_all_books
     puts 'All books'
-    if @books.length > 0
+    if @books.length.positive?
       @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     else
       puts 'No book added'
@@ -77,7 +79,7 @@ class App
 
   # List all people option "2"
   def list_all_people
-    if @people.length > 0
+    if @people.length.positive?
       @people.each { |person| puts "[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
     else
       puts 'No person added'
@@ -162,13 +164,13 @@ class App
     print 'Enter ID of the person: '
     @id1 = gets.chomp.to_i
     rentals = @rentals.map(&:create_json)
-    rentals.each { |rental|
+    rentals.each do |rental|
       if @id1 == rental[:id]
         print "Title: #{rental[:bookObj][:title]} Author: #{rental[:bookObj][:author]} \n"
       else
         puts 'No rental with this id!'
       end
-    }
+    end
   end
 
   # Exit from the app and write all data in files

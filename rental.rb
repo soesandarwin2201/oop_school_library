@@ -6,8 +6,8 @@ class Rental
     @book = book
     @person = person
     @rentals = []
-    person.rentals << self
-    book.rentals << self
+    @person.rentals << self
+    @book.rentals << self
   end
 
   def create_json
