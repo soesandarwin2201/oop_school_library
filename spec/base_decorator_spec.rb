@@ -3,7 +3,6 @@ require './person'
 require './capitalize_decorator'
 require './trimmer_decorator'
 
-
 describe CapitalizeDecorator do
   context 'test for the CapitalizeDecorator class' do
     it 'should test the correact capital name ' do
